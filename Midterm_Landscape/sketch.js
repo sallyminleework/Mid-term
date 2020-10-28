@@ -27,6 +27,7 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
+  //loading click sound for when the mouse is pressed
   clicksound = loadSound("clicksound.mp3");
 
   mount1 = new Mountain (0.01, 1, 100, 3);
@@ -71,7 +72,6 @@ function draw() {
 		for (let xPixel = 0; xPixel < width; xPixel++) {
 			let index = (xPixel + yPixel * width)*4; 
 		//
-		//pixels[index+0] = xPixel; //r color
 		pixels[index+1] = 0; //g color
 		pixels[index+2] = yPixel; //b color
 		pixels[index+3] = 200; //alpha color
@@ -87,7 +87,7 @@ function draw() {
   
   //draw rocket
   imageMode(CORNER);
-  image(rocket,random(-2,2), rocketY);
+  image(rocket,random(-2,2), rocketY, rocket.width/2, rocket.height/2) ;
 
   //drawing the sun with noise
   xOff = xOff + 0.008;
@@ -177,7 +177,7 @@ class Mountain {
   }
 }
 
-class Cloud { //CLOUDS
+class Cloud { 
   constructor(startX){
     this.x= startX;
     this.speed = -1.0;
