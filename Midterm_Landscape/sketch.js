@@ -45,7 +45,7 @@ function setup() {
   
   	pixelDensity(1);
   
-  //setting plane directions in setup so that it moves across the screen and back, plane move by 1 and it will change direction when the if statement is false (when it reaches the end of the width of the screen)
+  //setting plane directions in setup so that it moves across the screen and back, plane move by 1 and it will change direction when the conditional if statement is false (when it reaches the end of the width of the screen)
   	planemove = 1;
 	changeDirection = false;
   
@@ -128,7 +128,7 @@ function draw() {
   fill(255,190,150);
   rect(0, windowHeight-100, windowWidth, windowHeight - 200);
 
-  //when the airplane moves across the screen and approaches the end of width, it will change direction and move the other way
+  //creating conditional statement so that when the airplane moves across the screen and approaches the end of width, it will change direction and move the other way
   imageMode(CORNER);
   image(airplane,planemove, 0);
   if (planemove > width) {
