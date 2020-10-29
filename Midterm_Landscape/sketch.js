@@ -45,19 +45,19 @@ function setup() {
   
   	pixelDensity(1);
   
-  //setting plane directions so that it moves across the screen and back
+  //setting plane directions in setup so that it moves across the screen and back, plane move by 1 and it will change direction when the if statement is false (when it reaches the end of the width of the screen)
   	planemove = 1;
 	changeDirection = false;
   
-  //setting cloud start points
+  //setting cloud start points and setting the number of clouds to less than 50
   for(let i=0;i<50;i++){
 		let start = random(10*width);
 		clouds[i]= new Cloud (start);
 	}
   
-    //setting tree start points
+    //setting tree start points and the setting amount for less than 70
   for(let i=0;i<70;i++){
-		let start = 0;
+		let start = random(10*width);
 		trees[i]= new Tree (start);
 	}
 }
@@ -75,10 +75,10 @@ function draw() {
 		pixels[index+1] = 0; //g color
 		pixels[index+2] = yPixel; //b color
 		pixels[index+3] = 200; //alpha color
-		}
-	}
+		  }
+	  }
 	updatePixels();
-      }
+    }
   
   
   //drawing holding a phone
@@ -87,14 +87,14 @@ function draw() {
   
   //draw rocket
   imageMode(CORNER);
-  image(rocket,random(-2,2), rocketY, rocket.width/2, rocket.height/2) ;
+  image(rocket,random(-2,2), rocketY, rocket.width/2, rocket.height/2);
 
   //drawing the sun with noise
   xOff = xOff + 0.008;
   noStroke();
   fill(255,230,35,170);
-  let eSizeN = width*noise(xOff);
-  ellipse(windowWidth/9,height/6,eSizeN/4,eSizeN/4);
+  let ellipseSizeN = width*noise(xOff);
+  ellipse(windowWidth/9,height/6,ellipseSizeN/4,ellipseSizeN/4);
   
 
   //drawing the stars
@@ -128,7 +128,7 @@ function draw() {
   fill(255,190,150);
   rect(0, windowHeight-100, windowWidth, windowHeight - 200);
 
-  
+  //when the airplane moves across the screen and approaches the end of width, it will change direction and move the other way
   imageMode(CORNER);
   image(airplane,planemove, 0);
   if (planemove > width) {
@@ -145,6 +145,7 @@ function draw() {
   let b = random (0,255);
   let c = random (0,255);
   fill(a,b,c);
+  //dissapear when it reaches 60% because UFO dissappears and appears again 
   ellipse((frameCount % 600),500,160,20);
   ellipse((frameCount % 600),500,80,80);
 }
@@ -182,7 +183,7 @@ class Cloud {
     this.x= startX;
     this.speed = -1.0;
   }
-  
+  //startX will move from the left side because of this.speed = -1.0
   move(){
     this.x+= this.speed;
   }
@@ -209,6 +210,7 @@ class Tree {
   }
 }
 
+//when up or down key is pressed, the Y axis of the rocket will move up and down 
 function keyPressed(){
   if (keyCode == DOWN_ARROW)
     {rocketY = rocketY + 50;
@@ -218,6 +220,7 @@ function keyPressed(){
   }   
 }
 
+//when mouse is pressed, the clicksound will play
 function mousePressed(){
     clicksound.play();
 }
